@@ -48,6 +48,7 @@ ext4_xattr_security_set(struct dentry *dentry, const char *name,
 			      name, value, size, flags);
 }
 
+#ifndef CONFIG_EXT4_FS_SECURITY
 int
 ext4_init_security(handle_t *handle, struct inode *inode, struct inode *dir,
 		   const struct qstr *qstr)
@@ -69,6 +70,7 @@ ext4_init_security(handle_t *handle, struct inode *inode, struct inode *dir,
 	kfree(value);
 	return err;
 }
+#endif
 
 const struct xattr_handler ext4_xattr_security_handler = {
 	.prefix	= XATTR_SECURITY_PREFIX,

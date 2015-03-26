@@ -1042,11 +1042,11 @@ got:
 	err = ext4_init_acl(handle, inode, dir);
 	if (err)
 		goto fail_free_drop;
-
+#ifndef CONFIG_EXT4_FS_SECURITY
 	err = ext4_init_security(handle, inode, dir, qstr);
 	if (err)
 		goto fail_free_drop;
-
+#endif
 	if (EXT4_HAS_INCOMPAT_FEATURE(sb, EXT4_FEATURE_INCOMPAT_EXTENTS)) {
 		/* set extent flag only for directory, file and normal symlink*/
 		if (S_ISDIR(mode) || S_ISREG(mode) || S_ISLNK(mode)) {
